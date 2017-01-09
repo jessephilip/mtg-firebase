@@ -6,7 +6,7 @@ var app = express();
 var bodyParser = require("body-parser");
 
 // set port for app
-var PORT = 9001 || process.env.PORT;
+var PORT = process.env.PORT || 9001;
 
 // offer up static files
 app.use(express.static("views/assets"));
