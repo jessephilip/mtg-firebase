@@ -2,3 +2,4 @@ node_modules
 keys.js
 mtgServiceAccountKey.js
 notes
+npm-debug.log
