@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="google-signin-client_id" content="1035011540407-0t8uan7semme0s2cq7kph8rokgkkjb0f.apps.googleusercontent.com">
+	<meta name="google-signin-cookiepolicy" content="single_host_origin">
+	<meta name="google-signin-scope" content="profile email">
+	<title>Magic the Console</title>
+	<!-- google icons (like fontawesome) -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!-- materialize Compiled and minified CSS -->
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/alertifyjs/1.8.0/css/alertify.min.css" />
+	<!-- custom style sheet -->
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body>
+	<!-- navbar -->
+	<nav id="stickyNavBar" class="transparent">
+		<div class="nav-wrapper">
+			<a id="logo" class="brand-logo">Magic the Console</a>
+			<ul id="nav-mobile" class="right">
+				<li>
+					<p id="welcomeMessage">Welcome</p>
+				</li>
+				<li>
+					<img id="mainProfilePic" src="http://placehold.it/30x30" alt="profile image" class="circle profileImage">
+				</li>
+			</ul>
+		</div>
+	</nav>
+	<!-- sidebar -->
+	<ul id="slide-out" class="side-nav">
+		<li>
+			<div class="userView">
+				<div class="background">
+					<img src="images/mtgbackground.jpg" alt="mtg background image">
+				</div>
+				<a href="#!user"><img class="circle profileImage" src="http://placehold.it/50x50" alt="profile image"></a>
+				<a href="#!name"><span id="profileName" class="white-text name">John Doe</span></a>
+				<a href="#!email"><span id="profileEmail" class="white-text email">example@gmail.com</span></a>
+			</div>
+		</li>
+		<li><a class="subheader">Play</a></li>
+		<li><a id="hostGame"><i class="material-icons">cloud</i>Host Game</a></li>
+		<li><a id="joinGame"><i class="material-icons">group_work</i>Join Game</a></li>
+		<li>
+			<div class="divider"></div>
+		</li>
+		<li><a class="subheader">Build</a></li>
+		<li><a><i class="material-icons">description</i>Create Deck</a></li>
+		<li><a><i class="material-icons">description</i>Create Points</a></li>
+		<li>
+			<div class="divider"></div>
+		</li>
+		<li><a class="subheader">Tools</a></li>
+		<li id="coinFlip">
+			<a class="waves-effect"><img class="dice" src="images/coin-darkgrey.svg" alt="coin image">Coin Flip</a>
+		</li>
+		<li id="d6">
+			<a class="waves-effect roll"><img class="dice" src="images/d6perceptive-darkgrey.svg" alt="six-sided dice">D6</a>
+		</li>
+		<li id="d20">
+			<a class="waves-effect roll"><img class="dice" src="images/d20-darkgrey.svg" alt="twenty-sided dice">D20</a>
+		</li>
+		<li>
+			<div class="divider"></div>
+		</li>
+		<li><a class="subheader">Settings</a></li>
+		<li><a><i class="material-icons">perm_identity</i>Account Settings</a></li>
+		<li><a><i class="material-icons">settings</i>Site Settings</a></li>
+		<li><a class="subheader">Sign In</a></li>
+		<li>
+			<a class="g-signin2" data-onsuccess="onSignIn"></a>
+		</li>
+		<li><a id="signOut" class="btn">Sign Out</a></li>
+	</ul>
+	<a href="#" data-activates="slide-out" class="button-collapse show-on-large"></a>
+	<!-- main content area -->
+	<main>
+		<div class="row">
+			
+		</div>
+		<div class="row">
+			<section id="mainArea" class="col s6">
+
+			</section>
+
+			<section id="othersArea" class="col s6">
+
+			</section>
+		</div>
+
+	</main>
+	<section id="modals">
+		<!-- Modal Structure -->
+		<div id="hostGameModal" class="modal modal-fixed-footer">
+			<div class="modal-content">
+				<h4>Host a Game</h4>
+				<!-- Games Characteristics: location, date and time, starting life -->
+				<div class="row">
+					<div class="input-field col s5">
+						<input placeholder="Name Game (optional)" id="gameName" type="text" class="validate">
+						<label for="gameName">Game Name</label>
+					</div>
+					<div class="input-field col s2">
+						<input placeholder="Number of Players" id="gamePlayers" type="text" class="validate">
+						<label for="gamePlayers"># of Players</label>
+					</div>
+					<div class="input-field col s2">
+						<input placeholder="Starting Life" id="gameLife" type="text" class="validate">
+						<label for="gameLife">Starting Life</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s3">
+						<select id="gameFormat">
+								<option value="" disabled selected>Choose game format</option>
+								<option value="standard">Standard</option>
+								<option value="modern">Modern</option>
+								<option value="commander">Commander</option>
+								<option value="legacy">Legacy</option>
+								<option value="vintage">Vintage</option>
+								<option value="draft">Draft</option>
+								<option value="sealed">Sealed</option>
+							</select>
+						<label for="gameFormat">Game Format</label>
+					</div>
+					<div class="col s12">
+						<span>
+							<input type="checkbox" id="planeschase" />
+							<label for="planeschase">Planeschase</label>
+						</span>
+						<span>
+							<input type="checkbox" id="archenemy" />
+							<label for="archenemy">Archenemy</label>
+						</span>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<a id="hostCancel" class="modal-action modal-close waves-effect waves-red btn-flat">Cancel</a>
+				<a id="hostCreate" class="modal-action modal-close waves-effect waves-green btn-flat">Create Game</a>
+			</div>
+		</div>
+		<div id="joinGameModal" class="modal modal-fixed-footer">
+			<div class="modal-content">
+				<h4>Join a Game</h4>
+				<div id="openGames">
+
+				</div>
+			</div>
+			<div class="modal-footer">
+				<a href="#!" class=" modal-action modal-close waves-effect waves-red btn-flat">Close</a>
+			</div>
+		</div>
+	</section>
+	<!-- scripts and everything else not part of the frame -->
+	<!-- script for Google Sign In -->
+	<script type="text/javascript" src="https://apis.google.com/js/platform.js" async defer></script>
+	<!-- jQuery js -->
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<!-- materializeCompiled and minified JavaScript -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+	<!-- Alertify JavaScript -->
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/alertifyjs/1.8.0/alertify.min.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
+	<script>
+		// Initialize Firebase
+		var config = {
+			apiKey: "AIzaSyBFJvuE_iTUVOsOnNeD12wEcTS7yphWlag",
+			authDomain: "mtghelper-81c74.firebaseapp.com",
+			databaseURL: "https://mtghelper-81c74.firebaseio.com",
+			storageBucket: "mtghelper-81c74.appspot.com",
+			messagingSenderId: "1035011540407"
+		};
+		firebase.initializeApp(config);
+	</script>
+	<script type="text/javascript" src="javascript/globals.js"></script>
+	<script type="text/javascript" src="javascript/login.js"></script>
+	<script type="text/javascript" src="javascript/view.js"></script>
+	<script type="text/javascript" src="javascript/tools.js"></script>
+</body>
+
+</html>
