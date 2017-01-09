@@ -1,13 +1,13 @@
 {
   "name": "firebaseauth",
   "version": "1.0.0",
-  "description": "",
+  "description": "A tool for playing MTG games",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "author": "",
+  "author": "jessephilip",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.15.2",
