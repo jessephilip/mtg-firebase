@@ -20,16 +20,17 @@
 </head>
 
 <body>
+	<script type="text/javascript" src="javascript/facebook-login.js"></script>
 	<!-- navbar -->
 	<nav id="stickyNavBar" class="transparent">
 		<div class="nav-wrapper">
 			<a id="logo" class="brand-logo">Magic the Console</a>
 			<ul id="nav-mobile" class="right">
 				<li>
-					<p id="welcomeMessage">Welcome</p>
+					<p id="welcomeMessage"></p>
 				</li>
 				<li>
-					<img id="mainProfilePic" src="http://placehold.it/30x30" alt="profile image" class="circle profileImage">
+					<img id="mainProfilePic" src="https://placehold.it/30x30" alt="profile image" class="circle profileImage">
 				</li>
 			</ul>
 		</div>
@@ -46,46 +47,50 @@
 				<a href="#!email"><span id="profileEmail" class="white-text email">example@gmail.com</span></a>
 			</div>
 		</li>
-		<li><a class="subheader">Play</a></li>
-		<li><a id="hostGame"><i class="material-icons">cloud</i>Host Game</a></li>
-		<li><a id="joinGame"><i class="material-icons">group_work</i>Join Game</a></li>
-		<li>
+		<li class="hideable"><a class="subheader">Play</a></li>
+		<li class="hideable"><a id="hostGame"><i class="material-icons">cloud</i>Host Game</a></li>
+		<li class="hideable"><a id="joinGame"><i class="material-icons">group_work</i>Join Game</a></li>
+		<li class="hideable">
 			<div class="divider"></div>
 		</li>
-		<li><a class="subheader">Build</a></li>
-		<li><a><i class="material-icons">description</i>Create Deck</a></li>
-		<li><a><i class="material-icons">description</i>Create Points</a></li>
-		<li>
+		<li class="hideable"><a class="subheader">Build</a></li>
+		<li class="hideable"><a><i class="material-icons">description</i>Create Deck</a></li>
+		<li class="hideable"><a><i class="material-icons">description</i>Create Points</a></li>
+		<li class="hideable">
 			<div class="divider"></div>
 		</li>
-		<li><a class="subheader">Tools</a></li>
-		<li id="coinFlip">
+		<li class="hideable"><a class="subheader">Tools</a></li>
+		<li id="coinFlip" class="tool hideable">
 			<a class="waves-effect"><img class="dice" src="images/coin-darkgrey.svg" alt="coin image">Coin Flip</a>
 		</li>
-		<li id="d6">
+		<li id="d6" class="tool hideable">
 			<a class="waves-effect roll"><img class="dice" src="images/d6perceptive-darkgrey.svg" alt="six-sided dice">D6</a>
 		</li>
-		<li id="d20">
+		<li id="d20" class="tool hideable">
 			<a class="waves-effect roll"><img class="dice" src="images/d20-darkgrey.svg" alt="twenty-sided dice">D20</a>
 		</li>
-		<li>
+		<li class="hideable">
 			<div class="divider"></div>
 		</li>
-		<li><a class="subheader">Settings</a></li>
-		<li><a><i class="material-icons">perm_identity</i>Account Settings</a></li>
-		<li><a><i class="material-icons">settings</i>Site Settings</a></li>
+		<li class="hideable"><a class="subheader">Settings</a></li>
+		<li class="hideable"><a><i class="material-icons">perm_identity</i>Account Settings</a></li>
+		<li class="hideable"><a><i class="material-icons">settings</i>Site Settings</a></li>
+		<li>
+			<div class="divider hideable"></div>
+		</li>
 		<li><a class="subheader">Sign In</a></li>
 		<li>
 			<a class="g-signin2" data-onsuccess="onSignIn"></a>
+		</li>
+		<li>
+			<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+</fb:login-button>
 		</li>
 		<li><a id="signOut" class="btn">Sign Out</a></li>
 	</ul>
 	<a href="#" data-activates="slide-out" class="button-collapse show-on-large"></a>
 	<!-- main content area -->
 	<main>
-		<div class="row">
-
-		</div>
 		<div class="row">
 			<section id="mainArea" class="col s6">
 
@@ -170,17 +175,7 @@
 	<!-- Alertify JavaScript -->
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/alertifyjs/1.8.0/alertify.min.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
-	<script>
-		// Initialize Firebase
-		var config = {
-			apiKey: "AIzaSyBFJvuE_iTUVOsOnNeD12wEcTS7yphWlag",
-			authDomain: "mtghelper-81c74.firebaseapp.com",
-			databaseURL: "https://mtghelper-81c74.firebaseio.com",
-			storageBucket: "mtghelper-81c74.appspot.com",
-			messagingSenderId: "1035011540407"
-		};
-		firebase.initializeApp(config);
-	</script>
+	<script type="text/javascript" src="javascript/firebase-initialize.js"></script>
 	<script type="text/javascript" src="javascript/globals.js"></script>
 	<script type="text/javascript" src="javascript/login.js"></script>
 	<script type="text/javascript" src="javascript/view.js"></script>

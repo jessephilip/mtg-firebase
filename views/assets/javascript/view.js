@@ -17,6 +17,9 @@ $(document).on("click", ".collapsible-header", function(e) {
 
 // clicking on logo reveals sidebar
 $("#logo").on("click", function() {
+	if (userProfile.name === undefined) {
+		$(".hideable").css("display", "none");
+	}
     $('.button-collapse').sideNav('show');
 });
 
@@ -33,10 +36,12 @@ function signOut() {
     auth2.signOut().then(function() {
         console.log('User signed out.');
     });
-    $(".profileImage").attr("src", "http://placehold.it/50x50");
-    $("#mainProfilePic").attr("src", "http://placehold.it/30x30");
+    $(".profileImage").attr("src", "https://placehold.it/50x50");
+    $("#mainProfilePic").attr("src", "https://placehold.it/30x30");
     $("#profileName").text("John Doe");
     $("#profileEmail").text("example@gmail.com");
+
+	$(".hideable").css("display", "none");
 }
 
 // clicklistener for hosting a new game
@@ -190,33 +195,44 @@ function createCards(gamesArray) {
         var gameButton = $("<a>");
         gameButton.text("Join Game");
         gameButton.addClass('joinGameButton');
-        gameButton.attr("value-gameID", "gameID-" + key);
-        gameButton.attr("value-gameLife", "gameLife-" + data.gameLife);
+        gameButton.attr("data-gameId", key);
+        gameButton.attr("data-gameLife", data.gameLife);
         actions.append(gameButton);
 
         var trashIcon = $("<i>");
         trashIcon.addClass("material-icons right trashIcon");
         trashIcon.css("color", "orange");
         trashIcon.text("delete");
-        trashIcon.attr("value-gameID", "gameID-" + key);
+        trashIcon.attr("data-gameId", key);
         actions.append(trashIcon);
     }
 }
 
 // clicklistener for Join Game Card Buttons
-$(document).on("click", ".joinGameButton", addPlayerToGame);
+$(document).on("click", ".joinGameButton", joinGameButtonPress);
 
 // function to add player to game
-function addPlayerToGame() {
+function joinGameButtonPress() {
 
     // get the game's ID from data saved in the DOM element
-    var gameId = $(this).attr("value-gameID");
-    gameId = gameId.substr(7);
+    var gameId = $(this).attr("data-gameId");
     //console.log(gameId);
 
+	// start .on listener for firebase database
+	db.ref("games/open/" + gameId + "/gamePlayers").on("child_added", function(snapshot) {
+		console.log(".on gamePlayers: ", snapshot);
+	});
+
+    // add gameId to coinFlip, d6, and d20 buttons
+    $(".tool").attr("data-gameId", gameId);
+
+	addPlayer(gameId);
+}
+
+function addPlayer (gameId) {
+
     // get the games's starting life from data saved in the DOM element
-    var gameLife = $(this).attr("value-gameLife");
-    gameLife = parseInt(gameLife.substr(9));
+    var gameLife = parseInt($(this).attr("data-gameLife"));
     //console.log(gameLife);
 
     // create player object to add to gameplayers, an array in the open games section of the database
@@ -434,7 +450,9 @@ function revealCard(location, gameId) {
     var lifeDiv = $("<div>");
     divCardContent.append(lifeDiv);
 
-    var lifeTotal = $("<a class='lifeTotal'>");
+    var lifeTotal = $("<h4 class='lifeTotal'>");
+	lifeTotal.attr("id", "currentUserId");
+    lifeTotal.attr("data-gameId", gameId);
     lifeTotal.addClass(userProfile.uid + "Life");
     lifeTotal.text(gameLife);
     lifeDiv.append(lifeTotal);
@@ -495,8 +513,7 @@ $(document).on("click", ".trashIcon", closeGame);
 function closeGame() {
 
     // get gameID from an element of the DOM
-    var gameId = $(this).attr("value-gameID");
-    gameId = gameId.substr(7);
+    var gameId = $(this).attr("data-gameId");
     //console.log("gameId", gameId);
 
     // close the game by reading the snapshot of the game, setting it to games/closed and removing the game in games/open

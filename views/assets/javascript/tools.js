@@ -1,27 +1,28 @@
-// create a toast constructor
-function Toast(type, result) {
-    console.log(type, result);
-    this.type = type;
-    this.result = result;
-    this.user = userProfile.name;
-    this.time = Date.now();
-}
-
 // clicklistener for coinFlip button
 $("#coinFlip").on("click", coinFlip);
 
 // this function simulates a coin flip
-function coinFlip() {
-    // variable for result
+function coinFlip(keypressGameId) {
+
+	// variable for result
     var type = "coin";
     var result;
 
-    var math = Math.round(Math.random());
+	// gameId to know which branch to put the toast in
+	var gameId;
+
+	// if variable from button press is present, use that, else use data from DOM
+	if (keypressGameId === null) gameId = $(this).attr("data-gameId");
+	else gameId = keypressGameId;
+
+	// code to simulate a coin flip
+	var math = Math.round(Math.random());
     if (math === 1) result = "Heads";
     else result = "Tails";
 
     // use the Toast constructor to create a new object toast
-    var flip = new Toast(type, result);
+    var flip = new Toast(gameId, type, result);
+	console.log("flip", flip);
 
     // send toast object to the firebase database
     db.ref("rolls/").set(flip);
@@ -31,7 +32,7 @@ function coinFlip() {
 $("#d6").on("click", d6Roll);
 
 // this function simulates a coin flip
-function d6Roll() {
+function d6Roll(keypressGameId) {
 
     // variable for result
     var result;
@@ -39,12 +40,19 @@ function d6Roll() {
     // variable to tell the type of roll
     var type = "6";
 
+	// gameId to know which branch to put the toast in
+	var gameId;
+
+	// if variable from button press is present, use that, else use data from DOM
+	if (keypressGameId === null) gameId = $(this).attr("data-gameId");
+	else gameId = keypressGameId;
+
     // roll the die
     var math = Math.floor((Math.random() * 6) + 1);
     result = math;
 
     // objectify the roll
-    var d6 = new Toast(type, result);
+    var d6 = new Toast(gameId, type, result);
 
     // send toast object to the firebase database
     db.ref("rolls/").set(d6);
@@ -53,7 +61,7 @@ function d6Roll() {
 $("#d20").on("click", d20Roll);
 
 // this function simulates a coin flip
-function d20Roll() {
+function d20Roll(keypressGameId) {
 
     // variable for result
     var result;
@@ -61,12 +69,19 @@ function d20Roll() {
     // variable to tell the type of roll
     var type = "20";
 
+	// gameId to know which branch to put the toast in
+	var gameId;
+
+	// if variable from button press is present, use that, else use data from DOM
+	if (keypressGameId === null) gameId = $(this).attr("data-gameId");
+	else gameId = keypressGameId;
+
     // roll the die
     var math = Math.floor((Math.random() * 20) + 1);
     result = math;
 
     // objectify the roll
-    var d20 = new Toast(type, result);
+    var d20 = new Toast(gameId, type, result);
 
     // send toast object to the firebase database
     db.ref("rolls/").set(d20);
