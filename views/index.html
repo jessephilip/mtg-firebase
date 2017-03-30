@@ -1,20 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="mtg">
 
-<head>
+<head ng-controller="HeadController">
 	<meta charset="utf-8">
-	<title>Firebase Sign In</title>
-	<script src="https://apis.google.com/js/platform.js" async defer></script>
-	<meta name="google-signin-client_id" content="1035011540407-0t8uan7semme0s2cq7kph8rokgkkjb0f.apps.googleusercontent.com">
-	<meta name="google-signin-cookiepolicy" content="single_host_origin">
-	<meta name="google-signin-scope" content="profile email">
+	<title ng-bind="title"></title>
+	<!-- AngularJS CDN -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.min.js"></script>
 </head>
 
 <body>
+	<life-button></life-button>
 
-	<div class="g-signin2" data-onsuccess="onSignIn"></div>
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	<script type="text/javascript" src="javascript/login.js" charset="utf-8"></script>
+	<script src="../javascript/main.js" charset="utf-8"></script>
+	<script src="../javascript/controllers/head.js" charset="utf-8"></script>
+	<script src="../javascript/directives/lifeButton.js" charset="utf-8"></script>
 </body>
 
 </html>
